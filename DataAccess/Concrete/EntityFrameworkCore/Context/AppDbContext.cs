@@ -21,7 +21,7 @@ namespace Entities.Concrete.EntityFrameworkCore.Context
 
         public DbSet<comments> comments { get; set; }
         public DbSet<free_services> free_services { get; set; }
-        public DbSet<location> location { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<note> note { get; set; }
         public DbSet<paid_services> paid_services { get; set; }
         public DbSet<prices> prices { get; set; }

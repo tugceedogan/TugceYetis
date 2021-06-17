@@ -18,7 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/tema/css/sb-admin-2.min.css" rel="stylesheet">
-
+    @RenderSection("Style", false)
 </head>
 
 <body id="page-top">
@@ -34,9 +34,32 @@
 
                 <div class="sidebar-brand-text mx-3"> Tuğçe V1.0 </div>
             </a>
-            s
 
 
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Tur İşlemleri
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTur"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-users fa-cog"></i>
+                    <span>Tur Yönetimi</span>
+                </a>
+                <div id="collapseTur" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Tur Yönetimi:</h6>
+                        <a class="collapse-item" asp-controller="Tur" asp-action="Index">Turlar</a>
+                        <h6 class="collapse-header">Lokasyon Yönetimi:</h6>
+                        <a class="collapse-item" asp-controller="Location" asp-action="Index">Lokasyonlar</a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -359,6 +382,7 @@
     <!-- Page level custom scripts -->
     <script src="/tema/js/demo/datatables-demo.js"></script>
 
+    @RenderSection("Scripts", false)
 
 </body>
 

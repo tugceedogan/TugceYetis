@@ -29,7 +29,7 @@
                             <th>Numara</th>
                             <th>Üye Olma Tarihi</th>
                             <th>Katıldığı tur</th>
-                            <th>Ücret</th>
+                            <th>İşlem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,23 @@
                             <td>50283974</td>
                             <td>2021/06/17</td>
                             <td>Antalya, Side</td>
-                            <td>$170,750</td>
+                            <td class="text-center">
+
+                                <a href="javascript:;" data-target="/ysadmin/Users/Detail/1" class="btn btn-outline btn-sm purple detail">
+                                    <i class="fa fa-eye"></i> İncele
+                                </a>
+
+                                @Html.ActionLink("Düzenle", "Edit", new { Id = 1 }, new { @class = "btn btn-outline dark btn-sm black " }) |
+
+                                <div class="btn btn-outline btn-circle dark btn-sm">
+                                    <form asp-action="UserDelete" asp-route-id="1" method="post">
+                                        <button type="submit" title="Delete" class="btn btn-outline btn-circle dark btn-sm">
+                                            <i class="fa fa-trash"></i> Sil
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </td>
                         </tr>
          
                     </tbody>
