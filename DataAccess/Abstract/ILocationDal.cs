@@ -16,14 +16,20 @@ namespace DataAccess.Abstract
         List<Location> ListLocationWithRegionPaging(int page, int pageSize);
 
         //Arama
-        List<Location> LisLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize);
+        List<Location> ListLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize);
 
         List<Location> ListLocationWithRegionPagingByRegionId(int Id, int page, int pageSize);
 
         //Arama
         List<Location> ListLocationWithRegionPagingByRegionIdAndSearch(string search_text, int Id, int page, int pageSize);
 
-        List<Location> ListLocationWithRegionPagingByRegionSearch(string search_text, int page, int pageSize);
+        List<Location> ListLocationWithRegionPagingByRegionTitle(string search_text, int page, int pageSize);
+
+
+        Location GetLocationWithRegionByLocationId(int Id);
+        List<Location> ListLocationWithRegionByRegionId(int Id);
+        int CountLocationByRegioniId(int Id);
+
 
 
     }

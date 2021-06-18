@@ -72,5 +72,45 @@ namespace Business.Concrete.Managers
             _locationDal.Update(location);
             return new SuccessResult(Messages.SuccessTitle, Messages.Updated);
         }
+
+        public IDataResult<List<Location>> ListLocationWithRegionPaging(int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionPaging(page, pageSize));
+        }
+
+        public IDataResult<List<Location>> ListLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionAndSearchPaging(search_text,page, pageSize));
+        }
+
+        public IDataResult<List<Location>> ListLocationWithRegionPagingByRegionId(int Id, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionPagingByRegionId(Id, page, pageSize));
+        }
+
+        public IDataResult<List<Location>> ListLocationWithRegionPagingByRegionIdAndSearch(string search_text, int Id, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionPagingByRegionIdAndSearch(search_text, Id, page, pageSize));
+        }
+
+        public IDataResult<List<Location>> ListLocationWithRegionPagingByRegionTitle(string search_text, int page, int pageSize)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionPagingByRegionTitle(search_text, page, pageSize));
+        }
+
+        public IDataResult<Location> GetLocationWithRegionByLocationId(int Id)
+        {
+            return new SuccessDataResult<Location>(_locationDal.GetLocationWithRegionByLocationId(Id));
+        }
+
+        public IDataResult<List<Location>> ListLocationWithRegionByRegionId(int Id)
+        {
+            return new SuccessDataResult<List<Location>>(_locationDal.ListLocationWithRegionByRegionId(Id));
+        }
+
+        public IDataResult<int> CountLocationByRegionId(int Id)
+        {
+            return new SuccessDataResult<int>(_locationDal.CountLocationByRegioniId(Id));
+        }
     }
 }

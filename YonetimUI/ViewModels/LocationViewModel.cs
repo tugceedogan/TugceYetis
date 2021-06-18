@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace YonetimUI.ViewModels
 {
-    public class LokasyonViewModel
+    public class LocationViewModel
     {
 
         public string title { get; set; }

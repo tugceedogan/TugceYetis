@@ -25,8 +25,16 @@ namespace Business.Abstract
         //Arama
         IDataResult<List<Location>> ListLocationPaging(int page, int pageSize);
 
-
-        //Devam edecek
+        IDataResult<List<Location>> ListLocationWithRegionPaging(int page, int pageSize);
+        //Arama
+        IDataResult<List<Location>> ListLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize);
+        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionId(int Id, int page, int pageSize);
+        //Arama
+        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionIdAndSearch(string search_text, int Id, int page, int pageSize);
+        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionTitle(string search_text, int page, int pageSize);
+        IDataResult<Location> GetLocationWithRegionByLocationId(int Id);
+        IDataResult<List<Location>> ListLocationWithRegionByRegionId(int Id);
+        IDataResult<int> CountLocationByRegionId(int Id);
 
 
     }

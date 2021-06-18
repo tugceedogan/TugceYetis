@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFrameworkCore
 {
     public class EfLocationDal : EfEntityRepositoryBase<Location, AppDbContext>, ILocationDal
     {
-        public List<Location> LisLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize)
+        public List<Location> ListLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize)
         {
 
             using (var context = new AppDbContext())
@@ -108,7 +108,7 @@ namespace DataAccess.Concrete.EntityFrameworkCore
 
         }
 
-        public List<Location> ListLocationWithRegionPagingByRegionSearch(string search_text, int page, int pageSize)
+        public List<Location> ListLocationWithRegionPagingByRegionTitle(string search_text, int page, int pageSize)
         {
             using (var context = new AppDbContext())
             {
@@ -120,6 +120,44 @@ namespace DataAccess.Concrete.EntityFrameworkCore
                                 .Where(i => i.Region.title == search_text);
                 }
                 return cntxt.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            }
+        }
+
+        public Location GetLocationWithRegionByLocationId(int Id)
+        {
+            using (var context = new AppDbContext())
+            {
+                return context.Locations
+                             .Include(i => i.Region)
+                             .Where(i => i.location_id == Id).SingleOrDefault();
+
+            }
+        }
+
+        public List<Location> ListLocationWithRegionByRegionId(int Id)
+        {
+            using (var context = new AppDbContext())
+            {
+                return context.Locations
+                            .Include(i => i.Region).ToList();
+
+            }
+        }
+
+        public int CountLocationByRegioniId(int Id)
+        {
+
+            using (var context = new AppDbContext())
+            {
+                var cntxt = context.Locations.AsQueryable();
+
+                if (!string.IsNullOrEmpty(Id.ToString()) && Id != 0)
+                {
+                    cntxt = cntxt
+                                .Include(i => i.Region)
+                                .Where(i => i.regionId == Id);
+                }
+                return cntxt.Count();
             }
         }
     }
