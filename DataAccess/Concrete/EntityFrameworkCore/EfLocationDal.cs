@@ -51,7 +51,7 @@ namespace DataAccess.Concrete.EntityFrameworkCore
 
                 return cntxt.ToList();
 
-          
+
             }
         }
 
@@ -90,9 +90,10 @@ namespace DataAccess.Concrete.EntityFrameworkCore
             using (var context = new AppDbContext())
             {
                 var cntxt = context.Locations.AsQueryable();
-
+                cntxt = cntxt.Include(i => i.Region);
                 if (!string.IsNullOrEmpty(Id.ToString()) && Id != 0)
                 {
+
                     cntxt = cntxt.Where(i => i.regionId == Id);
                 }
 
