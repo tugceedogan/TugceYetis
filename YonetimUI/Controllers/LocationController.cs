@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.AdminUI.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,83 +37,76 @@ namespace YonetimUI.Controllers
                 {
                     title = "Lokasyonlar",
                     message = "Bu konumda lokasyon bilgileriniz listelenmektedir.",
-
-                     = djs.Data,
+                    Locations=locations.Data,
                     PagingInfo = new PagingInfo()
                     {
                         CurrentPage = page,
                         ItemsPerPage = limit,
-                        TotalItems = _djService.CountDjByradioApiId(radioApiId).Data,
+                        TotalItems = _locationService.CountLocationByRegionId(regionId).Data
                         //CurrentCategory = radioApiId
 
                     }
+
                 };
 
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            if (djs.Success)
-            {
-                var models = new DjListViewModel()
-                {
-                    title = "Dj Listesi",
-                    Djs = djs.Data,
-                    //RadiosApi = new SelectList(_radioApiService.ListWebRadio().Data, "radioApiId", "title"),
-                    PagingInfo = new PagingInfo()
-                    {
-                        CurrentPage = page,
-                        ItemsPerPage = limit,
-                        TotalItems = _djService.CountDjByradioApiId(radioApiId).Data,
-                        //CurrentCategory = radioApiId
-
-                    }
-                };
                 List<SelectListItem> note = new List<SelectListItem>();
-                note.Insert(0, new SelectListItem() { Value = "0", Text = " --- Radyo Seçiniz --- " });
-                foreach (var item in _radioApiService.ListWebRadio().Data)
-                {
-                    var selectList = new SelectListItem
-                    {
-                        Text = item.title,
-                        Value = item.radioApiId.ToString(),
-                    };
-                    note.Add(selectList);
-                }
-                models.RadiosApi = note;
+                note.Insert(0, new SelectListItem() { Value = "0", Text = " --- Bölge Seçiniz --- " });
+                //foreach (var item in _radioApiService.ListWebRadio().Data)
+                //{
+                //    var selectList = new SelectListItem
+                //    {
+                //        Text = item.title,
+                //        Value = item.radioApiId.ToString(),
+                //    };
+                //    note.Add(selectList);
+                //}
+                models.RegionsListItem = note;
 
-                if (!string.IsNullOrEmpty(metin))
+                if (!string.IsNullOrEmpty(text))
                 {
-                    models.Search = metin;
+                    models.Search = text;
                 }
 
 
                 return View(models);
+
+
             }
-            else
-            {
-                TempData.Put("message", new ResultMessage()
-                {
-                    Title = ProsesMessages.TitleError,
-                    Message = ProsesMessages.MessageError,
-                    Css = ProsesMessages.CssError,
-                });
-                return View();
-            }
+            return View();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //if (djs.Success)
+            //{
+
+
+            //}
+            //else
+            //{
+            //    TempData.Put("message", new ResultMessage()
+            //    {
+            //        Title = ProsesMessages.TitleError,
+            //        Message = ProsesMessages.MessageError,
+            //        Css = ProsesMessages.CssError,
+            //    });
+            //    return View();
+            //}
         }
     }
 }
