@@ -13,6 +13,8 @@ namespace Entities.Concrete
     {
         [Key]
         public int location_id { get; set; } //lokasyon id
+        [Display(Name = "Lokasyon Başlığı")]
+
         public string title { get; set; } //lokasyon başlık
         public string description { get; set; } // lokasyon açıklama
         [ForeignKey("Region")]

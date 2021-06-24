@@ -1,0 +1,35 @@
+﻿@section Style {
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="/tema/vendor/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <link href="/tema/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+
+}
+
+
+<div class="card shadow mb-4">
+    <!-- form start -->
+    @using (Html.BeginForm("Create", "Location", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("ViewForm")
+    }
+    <!-- END FORM-->
+</div>
+
+
+@section Scripts {
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="/tema/vendor/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+    <script src="/tema/vendor/bootstrap-tagsinput/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+    <script src="/tema/vendor/typeahead/handlebars.min.js" type="text/javascript"></script>
+    <script src="/tema/vendor/typeahead/typeahead.bundle.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <script src="/tema/pages/scripts/components-bootstrap-tagsinput.min.js" type="text/javascript"></script>
+
+
+    <script src="~/tema/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+}

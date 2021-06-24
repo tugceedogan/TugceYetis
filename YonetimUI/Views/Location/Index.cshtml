@@ -1,10 +1,6 @@
 ﻿@model LocationViewModel
 
 
-@{
-    ViewData["Title"] = "Lokasyonlar";
-}
-
 @section Style {
     <link href="/tema/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="/tema/vendor/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet">
@@ -44,13 +40,13 @@
         <h6 class="m-0 font-weight-bold text-primary">@Model.title</h6>
         <p class="m-0 font-weight-bold text-primary">@Model.message</p>
 
-        <a asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
+        <a asp-action="Create"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Yeni Ekle </a>
     </div>
     <div class="card-body">
         @if (Model.Locations.Count > 0)
         {
             <div class="table-responsive">
-                <table class="table table-condensed table-striped table-hover" @*id="dataTable"*@ width="100%" cellspacing="0">
+                <table class="table table-condensed table-striped table-hover" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>
@@ -94,23 +90,25 @@
 
       
                                 <td class="text-center">
-                                    <form asp-action="Active" asp-route-active="@item.state" asp-route-id="@item.location_id" method="post">
-                                        @if (item.state == true)
-                                        {
-                                            <button type="submit" title="Status" class="btn dark btn-sm yellow">
-                                                @item.state
-                                            </button>
-                                        }
-                                        @if (item.state == false)
-                                        {
-                                            <button type="submit" title="Status" class="btn dark btn-sm red">
-                                                @item.state
-                                            </button>
-                                        }
-                                    </form>
+                                    @using (Html.BeginForm("Active", "Location", new { active = @item.state,id = @item.location_id } , FormMethod.Post))
+                                    {
+                                            @if (item.state == true)
+                                            {
+                                                <button type="submit" title="Status" class="btn dark btn-sm yellow">
+                                                    @item.state
+                                                </button>
+                                            }
+                                            @if (item.state == false)
+                                            {
+                                                <button type="submit" title="Status" class="btn dark btn-sm red">
+                                                    @item.state
+                                                </button>
+                                            }
+                                       
+                                    }
                                 </td>
                                 <td class="text-center">
-                                    <a href="javascript:;" data-target="/ysadmin/Dj/ViewPreview/@item.location_id" class="btn btn-outline btn-sm purple detail">
+                                    <a href="javascript:;" data-target="/Location/ViewPreview/@item.location_id" class="btn btn-outline btn-sm purple detail">
                                         <i class="fa fa-eye"></i> İncele
                                     </a>
                                     @Html.ActionLink("Düzenle", "Edit", new { id = item.location_id }, new { @class = "btn btn-outline dark btn-sm black " }) |

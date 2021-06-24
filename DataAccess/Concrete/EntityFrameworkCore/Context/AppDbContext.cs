@@ -14,7 +14,7 @@ namespace Entities.Concrete.EntityFrameworkCore.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-JIVBBIO\SQLEXPRESS; Initial Catalog=TourDb; Integrated Security=True; Persist Security Info=False");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-5MA6AVU\SQLEXPRESS; Initial Catalog=TourDb; Integrated Security=True; Persist Security Info=False");
             base.OnConfiguring(optionsBuilder);
 
         }

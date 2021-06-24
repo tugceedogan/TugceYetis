@@ -18,6 +18,8 @@ namespace Business.Dependecy_Resolves.Custom_Extensions
             services.AddScoped<ILocationService, LocationManager>();
             services.AddScoped<ILocationDal, EfLocationDal>();
 
+            services.AddScoped<IRegionService, RegionManager>();
+            services.AddScoped<IRegionDal, EfRegionDal>();
 
 
         }

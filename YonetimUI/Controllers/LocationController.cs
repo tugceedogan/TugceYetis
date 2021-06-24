@@ -7,19 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using YonetimUI.ViewModels;
-
+using Entities.Concrete;
 namespace YonetimUI.Controllers
 {
     public class LocationController : Controller
     {
-   
+
         ILocationService _locationService;
-        public LocationController(ILocationService LocationService)
+        IRegionService _regionService;
+
+        public LocationController(ILocationService locationService, IRegionService regionService)
         {
-            _locationService = LocationService;
+            _locationService = locationService;
+            _regionService = regionService;
+
         }
 
-
+        [HttpGet]
         public IActionResult Index(int limit, string text, int regionId, int page = 1)
         {
             if (limit == 0)
@@ -37,7 +41,7 @@ namespace YonetimUI.Controllers
                 {
                     title = "Lokasyonlar",
                     message = "Bu konumda lokasyon bilgileriniz listelenmektedir.",
-                    Locations=locations.Data,
+                    Locations = locations.Data,
                     PagingInfo = new PagingInfo()
                     {
                         CurrentPage = page,
@@ -107,6 +111,31 @@ namespace YonetimUI.Controllers
             //    });
             //    return View();
             //}
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            LocationViewModel model = new LocationViewModel()
+            {
+                title = "Yeni Lokasyon Ekleme Bölümü",
+                RegionsListItem = new SelectList(_regionService.ListRegion().Data, "regionId", "title", " -- Seçim Yapınız -- "),
+                Location = new Location(),
+
+            };
+            return View(model);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Create(LocationViewModel model)
+        {
+
+
+
+            return View("Index");
+
         }
     }
 }
