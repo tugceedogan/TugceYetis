@@ -37,8 +37,6 @@
 
     <input type="hidden" name="Location.location_id" asp-for="Location.location_id" value="@Model.Location.location_id">
     <input type="hidden" name="Location.image_id" asp-for="Location.image_id" value="@Model.Location.image_id">
-    <input type="hidden" name="Location.regionId" asp-for="Location.regionId" value="@Model.Location.regionId">
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.Location.regionId, htmlAttributes: new { @class = "control-label" })
@@ -57,12 +55,12 @@
     </div>
 
     @*<div class="form-group">
-        <label asp-for="Location.keywords" class="control-label"></label>
-        <div class="form-group">
-            <input asp-for="Location.keywords" class="form-control" data-role="tagsinput" />
-        </div>
-        <span asp-validation-for="Location.keywords" class="text-danger"></span>
-    </div>*@
+            <label asp-for="Location.keywords" class="control-label"></label>
+            <div class="form-group">
+                <input asp-for="Location.keywords" class="form-control" data-role="tagsinput" />
+            </div>
+            <span asp-validation-for="Location.keywords" class="text-danger"></span>
+        </div>*@
 
 
     <div class="form-group">

@@ -313,10 +313,16 @@
 
                 </nav>
                 <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                @RenderBody()
-                <!-- /.container-fluid -->
+                <div class="container-fluid">
 
+                    @if (TempData["message"] != null)
+                    {
+                        <partial name="_resultmessage" model="@(TempData.Get<ResultMessage>("message"))" />
+                    }
+                    <!-- Begin Page Content -->
+                    @RenderBody()
+                    <!-- /.container-fluid -->
+                </div>
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -361,7 +367,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="/tema/vendor/jquery/jquery.min.js"></script>
-    <script src="/tema/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/tema/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/tema/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -381,6 +387,8 @@
     <script src="/tema/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <!-- Page level custom scripts -->
     <script src="/tema/js/demo/datatables-demo.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     @RenderSection("Scripts", false)
 

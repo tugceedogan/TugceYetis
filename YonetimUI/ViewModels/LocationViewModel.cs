@@ -1,5 +1,4 @@
-﻿using Core.AdminUI.ViewModels;
-using Entities.Concrete;
+﻿using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
