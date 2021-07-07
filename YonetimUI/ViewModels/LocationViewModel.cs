@@ -18,7 +18,7 @@ namespace YonetimUI.ViewModels
         public List<Location> Locations { get; set; }
 
         //Bölgeler Listesi (Lokasyon kategorileri)
-        public IEnumerable<SelectListItem> RegionsListItem { get; set; }
+        public IEnumerable<SelectListItem> TopLocationListItem { get; set; }
         public PagingInfo PagingInfo { get; set; }
 
         public string Search { get; set; }

@@ -12,29 +12,19 @@ namespace Business.Abstract
     {
 
 
-        IDataResult<Location> GetLocationId(int LocationId);
-        IDataResult<List<Location>> ListLocationByRegionId(int regionId);
-
-        IDataResult<List<Location>> ListLocation();
+        IDataResult<Location> GetLocationByLocationId(int locationId);
+        IDataResult<List<Location>> ListLocationByTopLocationId(int locationId);
+        IDataResult<int> CountLocationByTopLocationId(int locationId);
 
         IResult Create(Location location);
         IResult Update(Location location);
         IResult Delete(Location location);
-        IDataResult<int> CountLocation();
-        IDataResult<List<Location>> ListLocationWithRegion();
-        //Arama
-        IDataResult<List<Location>> ListLocationPaging(int page, int pageSize);
 
-        IDataResult<List<Location>> ListLocationWithRegionPaging(int page, int pageSize);
-        //Arama
-        IDataResult<List<Location>> ListLocationWithRegionAndSearchPaging(string search_text, int page, int pageSize);
-        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionId(int Id, int page, int pageSize);
-        //Arama
-        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionIdAndSearch(string search_text, int Id, int page, int pageSize);
-        IDataResult<List<Location>> ListLocationWithRegionPagingByRegionTitle(string search_text, int page, int pageSize);
-        IDataResult<Location> GetLocationWithRegionByLocationId(int Id);
-        IDataResult<List<Location>> ListLocationWithRegionByRegionId(int Id);
-        IDataResult<int> CountLocationByRegionId(int Id);
+        IDataResult<List<Location>> ListLocation();
+        IDataResult<List<Location>> ListLocationPaging(int page, int pageSize);
+        IDataResult<List<Location>> ListLocationPagingByTitle(string text, int page, int pageSize);
+        IDataResult<List<Location>> ListLocationPagingByTopLocationId(int locationId, int page, int pageSize);
+        IDataResult<List<Location>> ListLocationPagingByTopLocationIdAndByTitle(string text, int locationId, int page, int pageSize);
 
 
     }

@@ -16,32 +16,26 @@ namespace YonetimUI.Controllers
 {
     public class LocationController : Controller
     {
-
         ILocationService _locationService;
-        IRegionService _regionService;
-
-        public LocationController(ILocationService locationService, IRegionService regionService)
+        public LocationController(ILocationService locationService)
         {
             _locationService = locationService;
-            _regionService = regionService;
-
         }
 
         [HttpGet]
-        public IActionResult Index(int limit, string text, int regionId, int page = 1)
+        public IActionResult Index(int pageSize, string text, int locationId, int page = 1)
         {
 
             try
             {
-                if (limit == 0)
+                if (pageSize == 0)
                 {
-                    limit = 10;
+                    pageSize = 10;
                 }
-                //const int pageSize = 10;
-                var locations = _locationService.ListLocationWithRegionPagingByRegionIdAndSearch(text, regionId, page, limit);
+
+                var locations = _locationService.ListLocationPagingByTopLocationIdAndByTitle(text, locationId, page, pageSize);
                 if (locations.Success)
                 {
-
                     var models = new LocationViewModel()
                     {
                         title = "Lokasyonlar",
@@ -50,25 +44,24 @@ namespace YonetimUI.Controllers
                         PagingInfo = new PagingInfo()
                         {
                             CurrentPage = page,
-                            ItemsPerPage = limit,
-                            TotalItems = _locationService.CountLocationByRegionId(regionId).Data
+                            ItemsPerPage = pageSize,
+                            TotalItems = _locationService.CountLocationByTopLocationId(locationId).Data
                         }
-
                     };
 
                     List<SelectListItem> note = new List<SelectListItem>();
-                    note.Insert(0, new SelectListItem() { Value = "0", Text = " --- Bölge Seçiniz --- " });
-                    foreach (var item in _regionService.ListRegion().Data)
+                    note.Insert(0, new SelectListItem() { Value = "0", Text = " --- Lokasyon Seçiniz --- " });
+                    foreach (var item in _locationService.ListLocation().Data)
                     {
                         var selectList = new SelectListItem
                         {
                             Text = item.title,
-                            Value = item.regionId.ToString(),
+                            Value = item.location_Id.ToString(),
                         };
                         note.Add(selectList);
                     }
 
-                    models.RegionsListItem = note;
+                    models.TopLocationListItem = note;
 
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -101,10 +94,25 @@ namespace YonetimUI.Controllers
             LocationViewModel model = new LocationViewModel()
             {
                 title = "Yeni Lokasyon Ekleme Bölümü",
-                RegionsListItem = new SelectList(_regionService.ListRegion().Data, "regionId", "title", " -- Seçim Yapınız -- "),
+                //TopLocationListItem = new SelectList(_locationService.ListLocation().Data, "location_Id", "title", " -- Seçim Yapınız -- "),
                 Location = new Location(),
 
             };
+
+            List<SelectListItem> note = new List<SelectListItem>();
+            note.Insert(0, new SelectListItem() { Value = "0", Text = " --- Lokasyon Seçiniz --- " });
+            foreach (var item in _locationService.ListLocation().Data)
+            {
+                var selectList = new SelectListItem
+                {
+                    Text = item.title,
+                    Value = item.location_Id.ToString(),
+                };
+                note.Add(selectList);
+            }
+
+            model.TopLocationListItem = note;
+
             return View(model);
         }
 
@@ -115,11 +123,10 @@ namespace YonetimUI.Controllers
         {
             Location entity = new Location()
             {
-               location_id=model.Location.location_id,
+               location_Id=model.Location.location_Id,
                 title=model.Location.title,
                 description=model.Location.description,
-                regionId= model.Location.regionId,
-                image_id = model.Location.image_id,
+                image_Id = model.Location.image_Id,
                 row = model.Location.row,
                 state = model.Location.state,
                 IsChecked = model.Location.IsChecked,
@@ -152,16 +159,15 @@ namespace YonetimUI.Controllers
         {
             try
             {
-                var deletemodel = _locationService.GetLocationId((int)id);
+                var deletemodel = _locationService.GetLocationByLocationId((int)id);
                 if (deletemodel.Success)
                 {
                     Location entity = new Location()
                     {
-                        location_id = deletemodel.Data.location_id,
+                        location_Id = deletemodel.Data.location_Id,
                         title = deletemodel.Data.title,
                         description = deletemodel.Data.description,
-                        regionId = deletemodel.Data.regionId,
-                        image_id = deletemodel.Data.image_id,
+                        image_Id = deletemodel.Data.image_Id,
                         row = deletemodel.Data.row,
                         state = deletemodel.Data.state,
                         IsChecked = deletemodel.Data.IsChecked,
@@ -205,7 +211,7 @@ namespace YonetimUI.Controllers
         [HttpPost]
         public IActionResult Active(bool active, int id)
         {
-            var modelactive = _locationService.GetLocationId((int)id);
+            var modelactive = _locationService.GetLocationByLocationId((int)id);
 
             LocationViewModel model = new LocationViewModel()
             {
