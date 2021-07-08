@@ -25,7 +25,7 @@ namespace Entities.Concrete
         public string imgPath { get; set; } // lokasyon kapak resmi
         public int image_Id { get; set; } //lokasyon resim Id ////////////////////////////////////////////
         public int row { get; set; } //bölge sırası////////////////////////////////////////////
-        public bool? state { get; set; } //lokasyon görünme durumu
-        public bool? IsChecked { get; set; } //lokasyon silinip silinmediği
+        public bool state { get; set; } //lokasyon görünme durumu
+        public bool IsChecked { get; set; } //lokasyon silinip silinmediği
     }
 }
